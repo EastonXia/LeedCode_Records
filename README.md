@@ -1,0 +1,2 @@
+# LeedCode_Records
+记录用js重新刷LeedCode的过程

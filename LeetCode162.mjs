@@ -27,8 +27,26 @@
 /**
  * @param {number[]} nums
  * @return {number}
+ *
+ * 二分查找
+ *
+ * 根据左右指针计算中间位置 m，并比较 m 与 m+1 的值，如果 m 较大，则左侧存在峰值，r = m，如果 m + 1 较大，则右侧存在峰值，l = m + 1
+ *
  */
-var findPeakElement = function (nums) {};
+var findPeakElement = function (nums) {
+  var left = 0;
+  var right = nums.length - 1;
+
+  while (left < right) {
+    var mid = left + Math.floor((right - left) / 2);
+    if (nums[mid] < nums[mid + 1]) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+  return left;
+};
 
 function main() {
   console.log(findPeakElement([1, 2, 3, 1]));

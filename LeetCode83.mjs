@@ -29,7 +29,20 @@ function ListNode(val, next) {
  * @return {ListNode}
  */
 var deleteDuplicates = function(head) {
+  if(head === null) return head;
 
+  let value = head.val;
+  let cur = head;
+
+  while(cur !== null && cur.next !== null) {
+      if(cur.val === cur.next.val) {
+          cur.next = cur.next.next;
+      } else {
+          cur = cur.next
+      }
+  }
+
+  return head;
 };
 
 function main() {

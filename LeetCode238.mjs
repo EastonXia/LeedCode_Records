@@ -38,13 +38,13 @@ var productExceptSelf = function (nums) {
   const result = new Array(len); // 最终结果
 
   // 左侧数字处理
-  left[0] = 1;
+  left[0] = 1; // 0 的左侧没有数字，所以乘积为1
   for (let i = 1; i < len; i++) {
     left[i] = left[i - 1] * nums[i - 1];
   }
 
   // 右侧数字处理
-  right[len - 1] = 1;
+  right[len - 1] = 1; // 最后一个数字的右侧没有数字，所以乘积为1
   for (let j = len - 2; j >= 0; j--) {
     right[j] = right[j + 1] * nums[j + 1];
   }

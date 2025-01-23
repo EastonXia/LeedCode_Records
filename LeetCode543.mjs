@@ -29,16 +29,16 @@ var diameterOfBinaryTree = function (root) {
 
   const depth = (node) => {
     if (node === null) return 0;
-    const left = depth(node.left);
-    const right = depth(node.right);
-    ans = Math.max(ans, left + right + 1);
+    const left = depth(node.left); // 左侧有多少个节点
+    const right = depth(node.right); // 右侧有多少个节点
+    ans = Math.max(ans, left + right + 1); // 最大值与，左侧 + 自身 + 右侧节点数比较
 
-    return Math.max(left, right) + 1
+    return Math.max(left, right) + 1 // 左侧/右侧 与自身
   };
 
   depth(root);
 
-  return ans - 1; // 题目特性，总长度减1
+  return ans - 1; // 返回结果不包含开始的节点，所以减 1
 };
 
 function main() {

@@ -40,17 +40,18 @@ function ListNode(val, next) {
  *
  */
 var reverseList = function (head) {
-  var prev = null;
-  var curr = head;
+  let resHead = null; // 输出的头节点
+  let currNode = head; // 遍历的节点
 
-  while (curr !== null) {
-    var next = curr.next;
-    curr.next = prev;
-    prev = curr;
-    curr = next;
+  while(currNode !== null) {
+    let secondNode = currNode.next; // 获取下一个节点
+    currNode.next = resHead; // 完成反转指向
+    // 更新输出的头节点、遍历的节点
+    resHead = currNode;
+    currNode = secondNode;
   }
 
-  return prev
+  return resHead;
 };
 
 /**

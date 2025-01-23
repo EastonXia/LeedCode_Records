@@ -49,7 +49,7 @@ var detectCycle = function (head) {
   // 第一次相遇，slow走一步，fast走两步
   while (true) {
     // 注意这里是两个fast的判断
-    if (fast === null || fast === null) return null;
+    if (fast === null || fast.next === null) return null;
 
     slow = slow.next;
     fast = fast.next.next;

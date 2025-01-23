@@ -23,9 +23,12 @@
 */
 
 /**
+ * 找出一个当前的最低点，然后后续遍历，分别计算收益值，并更新最大收益值
+ * 如果遇到新的最低点，则更新最低点的值，然后重复上述操作
+ * 最后得出的最大收益值就是结果
+ * 
  * @param {number[]} prices
  * @return {number}
- * 
  */
 var maxProfit = function (prices) {
   if (prices.length < 2) {

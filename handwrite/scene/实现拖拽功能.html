@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      #box {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+      }
+    </style>
+  </head>
+  <!-- 实现拖拉拽功能 -->
+  <body>
+    <div id="box"></div>
+    <script type="text/javascript">
+      const box = document.getElementById("box");
+
+      let moving = false;
+      let xBuffer = 0;
+      let yBuffer = 0;
+
+      document.addEventListener("mousedown", (e) => {
+        moving = true;
+        const { left, top } = box.getBoundingClientRect();
+        const { clientX, clientY } = e;
+        xBuffer = clientX - left;
+        yBuffer = clientY - top;
+        box.style.cursor = 'grabbing';
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!moving) {
+          return;
+        }
+        box.style.left = e.clientX - xBuffer + "px";
+        box.style.top = e.clientY - yBuffer + "px";
+      });
+
+      document.addEventListener("mouseup", (e) => {
+        if (!moving) {
+          return;
+        }
+        moving = false;
+        box.style.cursor = 'grab';
+      });
+    </script>
+  </body>
+</html>

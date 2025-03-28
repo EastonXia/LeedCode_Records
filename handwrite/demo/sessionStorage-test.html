@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      #box {
+        width: 1000px;
+        height: 1000px;
+        background-color: blue;
+      }
+    </style>
+  </head>
+  <!-- 实现前端加水印 -->
+  <body>
+    <div id="box" onclick="handleClick()"></div>
+    <script type="text/javascript">
+      sessionStorage.setItem('a', 1111);
+
+      function handleClick() {
+        sessionStorage.setItem('b', 2222);
+        window.open(window.location.href) // 继承原页面的 sessionStroage
+      }
+    </script>
+  </body>
+</html>

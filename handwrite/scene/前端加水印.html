@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      #box {
+        width: 1000px;
+        height: 1000px;
+        background-color: blue;
+      }
+    </style>
+  </head>
+  <!-- 实现前端加水印 -->
+  <body>
+    <div id="box"></div>
+    <script type="text/javascript">
+      function addWatermark(id, content) {
+        const canvas = document.createElement("canvas");
+        canvas.width = 200;
+        canvas.height = 150;
+        const ctx = canvas.getContext("2d");
+
+        ctx.font = "13px 微软雅黑";
+        ctx.fillStyle = "rgba(255,255,255,0.5)";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.rotate(-Math.PI / 6);
+        ctx.fillText(content, 50, 100);
+
+        const container = document.getElementById(id);
+        container.style.backgroundImage = `url(${canvas.toDataURL(
+          "image/png"
+        )})`;
+        container.style.backgroundRepeat = "repeat";
+      }
+
+      addWatermark("box", "哲玄前端");
+    </script>
+  </body>
+</html>

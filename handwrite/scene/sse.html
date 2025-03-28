@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSE Example</title>
+</head>
+<body>
+    <div>SSE Message:</div>
+    <div id="message"></div>
+
+    <script>
+      const eventSource = new EventSource('http://localhost:3000/stream');
+      
+      eventSource.onmessage = (event) => {
+        const data = event.data;
+        console.log('event data:', data);
+        const messageBox = document.getElementById('message');
+        messageBox.textContent = data;
+      }
+
+      eventSource.onerror = (error) => {
+        console.log('SSE error: ', error);
+        eventSource.close();
+      }
+    </script>
+</body>
+</html>

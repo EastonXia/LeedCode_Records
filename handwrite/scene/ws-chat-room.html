@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>websocket-chating-room</title>
+</head>
+<body>
+    <h1>聊天室</h1>
+    <ul id="messageList"></ul>
+    <input id="messageInput" />
+    <input id="messageButton" type="button" value="发送">
+
+    <script>
+      const url = 'ws://localhost:3000';
+      const websocket = new WebSocket(url);
+
+      websocket.onopen = function(event) {
+       console.log("WebSocket is open now.");
+      };
+
+      websocket.onmessage = (event) => {
+        const li = document.createElement('li');
+        li.textContent = event.data;
+        const messageList = document.getElementById('messageList');
+        messageList.appendChild(li);
+      }
+
+      websocket.onerror = (error) => {
+        console.log(error);
+        websocket.close();
+      }
+
+      const messageButton = document.getElementById('messageButton');
+      messageButton.addEventListener('click', () => {
+        const messageInput = document.getElementById('messageInput');
+        let inputVal = messageInput.value;
+        if(inputVal) {
+          websocket.send(inputVal);
+          messageInput.value = ''
+        }
+      })
+    </script>
+
+</body>
+</html>

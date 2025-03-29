@@ -6,12 +6,12 @@
  *
  */
 
-const randomArray = function (arr) {
-  for (let i = 0; i < arr.length; i++) {
-    const randomIndex = Math.round(Math.random() * arr.length - 1 - i) + i;
+const shuffleArray = function (arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const randomIndex = Math.floor(Math.random() * i);
     [arr[i], arr[randomIndex]] = [arr[randomIndex], arr[i]];
   }
 };
 
 const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-console(arr);
+console(shuffleArray(arr));

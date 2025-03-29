@@ -1,25 +1,22 @@
 /**
  * 实现函数柯里化
- *
+ *  
+ * add(1)(2)(3,4)(5,6,7)(8).valueOf() = 36
  */
 
-const currying = function (fn, ...args) {
-  const len = fn.length; // 统计函数有多少个参数
+const curry = (...args1) => {
+  const args = [...args1];
 
-  let allArgs = [...args]; // 保存出现过的参数
-  const result = function (...innerArgs) {
-     allArgs = [...allArgs, ...innerArgs]; // 更新出现过的参数
-    if (allArgs.length === len) {
-      return fn(...allArgs);
-    } else {
-      return result;
-    }
-  };
+  const addFn = (...args2) => {
+    args.push(...args2);
+    return addFn;
+  }
 
-  return result;
-};
+  addFn.valueOf = () => {
+    return args.reduce((pre, cur) => pre + cur, 0);
+  }
 
+  return addFn;
+}
 
-const add = (a, b, c) => a + b + c;
-const a = currying(add, 1);
-console.log(a(2)(3))
+console.log(curry(1)(2)(3,4)(5,6,7)(8).valueOf())

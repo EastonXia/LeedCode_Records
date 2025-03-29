@@ -1,11 +1,13 @@
 /**
  * 实现数组扁平化
  *
- * 递归方法和迭代方法
- *
+ * 单层扁平化可用函数
+ * 1.扩展运算符 [ ...arr ]
+ * 2.数组的 concat 方法 [].concat(arr)
+ * 3.数组的 flat 方法 arr.flat()
+ * 4.数组的 arr4.flat(Infinity); 这是多层方法
  */
 
-// 递归
 const flatter = function (arr) {
   if (arr.length === 0) return arr;
 
@@ -14,13 +16,3 @@ const flatter = function (arr) {
   });
 };
 
-// 迭代
-const flatter2 = function (arr) {
-  if (arr.length === 0) return arr;
-
-  while (arr.some((cur) => Array.isArray(cur))) { 
-      arr = [].concat(arr);
-  }
-
-  return arr
-};

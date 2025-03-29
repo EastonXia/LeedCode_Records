@@ -9,30 +9,25 @@ const debounce = function (fn, delay) {
 
   return function (...args) {
     const context = this;
-
-    if (timer) {
-      clearTimeout(timer);
-
-      timer = setTimeout(() => {
-        fn.apply(context, args);
-      }, delay);
-    }
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn.apply(context, args);
+      timer = null;
+    }, delay);
   };
 };
 
 // 节流，触发第一次
 const throttle = function (fn, delay) {
-  let flag = true;
+  let timer;;
 
   return function (...args) {
     const context = this;
-    
-    if (!flag) return;
-    flag = false;
+    if (!timer) return;
 
-    setTimeout(() => {
+    timer = setTimeout(() => {
       fn.apply(context, args);
-      flag = true;
+      timer = null;
     }, delay);
   };
 };

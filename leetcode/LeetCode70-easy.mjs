@@ -24,23 +24,28 @@
 /**
  * @param {number} n
  * @return {number}
- * 
+ * 斐波那契数列
  */
 var climbStairs = function (n) {
   if (n === 1 || n === 2) return n;
 
-  // 斐波那契数列
-  // return climbStairs(n - 1) + climbStairs(n - 2);
+  return climbStairs(n - 1) + climbStairs(n - 2);
+};
 
-  // 动态规划
-  var stairsList = [1, 2];
 
-  for (var i = 2; i < n; i++) {
-    stairsList.push(stairsList[i - 1] + stairsList[i - 2]);
+const climbStairs2 = function (n) {
+  let a = 0;
+  let b = 0;
+  let result = 1;
+
+  for(let i = 1;i <= n; i++) {
+    a = b;
+    b = result;
+    result = a + b;
   }
 
-  return stairsList[n - 1];
-};
+  return result;
+}
 
 function main() {
   console.log(climbStairs(2));

@@ -46,8 +46,8 @@ var lengthOfLongestSubstring = function (s) {
 
   while (left < len) {
     // 获取左右指针对应的字符，注意当指针超出范围值返回的值是空字符串
-    var leftChar = s.charAt(left);
-    var rightChar = s.charAt(right >= len ? len : right); // 防止返回空字符串
+    var leftChar = s[left];
+    var rightChar = s[right]; // 防止返回空字符串
     if (newSet.has(rightChar)) {
       // 如果有重复，移动左指针
       newSet.delete(leftChar);

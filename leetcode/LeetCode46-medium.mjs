@@ -35,7 +35,7 @@
    总结搜索的方法：按顺序枚举每一位可能出现的情况，已经选择的数字在 当前 要选择的数字中不能出现。按照这种策略搜索就能够做到 不重不漏。这样的思路，可以用一个树形结构表示。
 
 */
-  var permute = function (nums) {
+function permute (nums) {
   var len = nums.length;
   var res = [];
   if (len === 0) return res;

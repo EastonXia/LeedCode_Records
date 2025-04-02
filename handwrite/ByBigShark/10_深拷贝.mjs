@@ -7,9 +7,14 @@
 JSON.parse(JSON.stringify());
 
 // 方案2
-function deepClone(obj) {
+function deepClone(obj, hash = new WeakMap()) {
   if (obj === null || typeof obj !== 'object') {
     return obj;
+  }
+
+  // 处理循环引用
+  if (hash.has(obj)) {
+    return hash.get(obj);
   }
 
   let copyObj;

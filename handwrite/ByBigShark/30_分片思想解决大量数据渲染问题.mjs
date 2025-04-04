@@ -22,7 +22,7 @@ const loop = function (curTotal, curIndex) {
   requestAnimationFrame(function () {
     for (let i = 0; i < count; i++) {
       const li = document.createElement('li');
-      li.innerText = curIndex + i + " : " + ~~(Math.random() * total);;
+      li.innerText = curIndex + i + " : " + ~~(Math.random() * total);
       ul.appendChild(li);
     }
     

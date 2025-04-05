@@ -1,5 +1,3 @@
-import { readLine, close } from '../utils/Input.js';
-
 /**
   LeetCode01---两数之和
 

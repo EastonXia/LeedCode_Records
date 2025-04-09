@@ -19,11 +19,11 @@ const debounce = function (fn, delay) {
 
 // 节流，触发第一次
 const throttle = function (fn, delay) {
-  let timer;;
+  let timer;
 
   return function (...args) {
     const context = this;
-    if (!timer) return;
+    if (timer) return;
 
     timer = setTimeout(() => {
       fn.apply(context, args);

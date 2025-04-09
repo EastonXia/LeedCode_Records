@@ -4,50 +4,28 @@
  */
 
 Function.prototype.myApply = function (context, args) {
-  if (!context || context === null) {
-    context = window;
-  }
-
-  // 创造唯一的key值  作为我们构造的context内部方法名
-  const fn = Symbol('fn');
-  context[fn] = this; // this指向调用apply的函数
-
-  return context[fn](...args);
+  context = context || window; // 如果传入上下文，则默认为全局对象
+  const uniqueId = Symbol(); // 传入唯一值，避免属性冲突
+  context[uniqueId] = this; // 在上下文中添加一个属性，将函数赋值给这个属性
+  const result = context[uniqueId](...args); // 执行函数
+  delete context[uniqueId]; // 删除属性
+  return result; // 返回结果
 };
 
 // 和apply实现一致，只不过第二个参数变了
-Function.prototype.myCall = function (context, ...args) {
-  if (!context || context === null) {
-    context = window;
-  }
-
-  const fn = Symbol('fn');
-  context[fn] = this;
-
-  return context[fn](...args);
+Function.prototype.myCall = function (context, args) {
+  context = context || window; // 如果传入上下文，则默认为全局对象
+  const uniqueId = Symbol(); // 传入唯一值，避免属性冲突
+  context[uniqueId] = this; // 在上下文中添加一个属性，将函数赋值给这个属性
+  const result = context[uniqueId](...args); // 执行函数
+  delete context[uniqueId]; // 删除属性
+  return result; // 返回结果
 };
 
-// 要考虑两种情况，一种是正常函数，一种是构造函数，同时要考虑参数合并
+
 Function.prototype.myBind = function (context, ...args) {
-  if (!context || context === null) {
-    context = window;
+  const func = this;
+  return function(...newArgs) {
+    func.apply(context, [...args, ...newArgs]);
   }
-
-  const fn = Symbol('fn');
-  context[fn] = this;
-
-  let _this = this; // 为构造函数情况保存调用函数
-
-  const result = function (...innerArgs) {
-    if (this instanceof _this) {
-      // 构造函数时，this为实例对象，函数的执行要在实例对象里面
-      this[fn] = _this;
-      this[fn](...[...args, ...innerArgs]);
-    } else {
-      context[fn](...[...args, ...innerArgs]);
-    }
-  };
-
-  result.prototype = Object.create(this.prototype);
-  return result;
 };

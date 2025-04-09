@@ -9,8 +9,8 @@ class Component{
 
   constructor() {
     this.data = new Proxy(this._data, {
-      set(target, key, value){
-        this._data[key] = value;
+      set: (target, key, value) => {
+        target[key] = value;
 
         if(!this.pending) {
           this.pending = true;
@@ -19,15 +19,17 @@ class Component{
             this.render();
           })
         }
+
+        return true;  // 添加返回值
       },
-      get(target, key){
-        return this._data[key];
+      get: (target, key) => {
+        return target[key];
       }
     })
   }
 
   render() {
-    console.log(`render - name: ${this.data.name}`)
+    console.log(`render - name: ${this._data.name}`)
   }
 }
 

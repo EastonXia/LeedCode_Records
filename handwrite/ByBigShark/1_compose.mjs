@@ -15,6 +15,7 @@ const compose = function (...fn) {
     };
   });
 };
+
 f1 = (...args) => {
   return fn(fn2(...args))
 }

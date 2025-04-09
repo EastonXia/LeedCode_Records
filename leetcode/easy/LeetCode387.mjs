@@ -39,7 +39,7 @@
  * 如果哈希映射中的所有值均为 −1，我们就返回 −1。
  *
  */
-var firstUniqChar = function (s) {
+var firstUniqChar2 = function (s) {
   const position = new Map();
   const n = s.length;
   for (let [i, ch] of Array.from(s).entries()) {
@@ -63,6 +63,30 @@ var firstUniqChar = function (s) {
   
   return first;
 };
+
+var firstUniqChar = function (s) {
+  const map = new Map();
+  let index;
+
+  for (let i = 0; i < s.length; i++) {
+    let str = s[i];
+    if (map.has(str)) {
+      map.set(str, map.get(str) + 1);
+    } else {
+      map.set(str, 1);
+    }
+  }
+
+  for(let [key, value] of map) {
+    if (value === 1) {
+      index = key;
+      break;
+    } 
+  }
+  return index === undefined ? -1 : s.indexOf(index);
+
+};
+
 
 function main() {
   console.log(firstUniqChar('leetcode'));
